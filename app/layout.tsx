@@ -1,6 +1,7 @@
 import "../styles/globals.css";
-import ToolList from "../components/ToolList";
+import ToolList from "@/components/ToolList";
 import localFont from "@next/font/local";
+import TopNavbar from "@/components/TopNavbar";
 
 const myFont = localFont({ src: "../public/fonts/Cubic_11_1.013_R.woff2" });
 
@@ -21,7 +22,11 @@ export default function RootLayout({
         <ToolList />
 
         {/* 主要資料送出 */}
-        {children}
+        <div className="flex-auto bg-gradient-to-br from-[#3C3A3C] to-[#333134]">
+          {/* 頂部按鈕列 */}
+          <TopNavbar />
+          {children}
+        </div>
 
         {/* ChatGPT 返回內容 */}
       </body>

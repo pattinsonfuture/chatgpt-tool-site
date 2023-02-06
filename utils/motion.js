@@ -32,6 +32,18 @@ export const navChildrens = {
   }
 }
 
+export const lookAtMouse = (position ,eyes) => ({
+  initial: {
+    left: position.x,
+    top: position.y,
+    // x: eyes === 'left' ? 0 : eyes === 'right' ? 0 : 0,
+  },
+  look:{
+    translateX: (position.x-0.5)*50,
+    translateY: (position.y)*50,
+  },
+});
+
 export const slideIn = (direction, type, delay, duration) => ({
   hidden: {
     x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
