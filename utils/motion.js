@@ -44,6 +44,27 @@ export const lookAtMouse = (position ,eyes) => ({
   },
 });
 
+
+export const borderGradient = {
+  hidden: {
+    borderColor: "#0000FF",
+    color: "#0000FF",
+    },
+
+  animate: {
+    // border  暗紅 暗橙 暗黃 暗綠 暗藍 暗紫 漸變
+    borderColor: ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#8B00FF"],
+    color: ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#8B00FF"],
+    transition:{
+      duration: 2,
+      ease: "easeOut",
+      repeat: Infinity,
+    }
+  }
+
+
+}
+
 export const slideIn = (direction, type, delay, duration) => ({
   hidden: {
     x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
