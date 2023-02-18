@@ -1,6 +1,7 @@
 import { Inter } from "@next/font/google";
 import Robot from "@/components/Robot";
 import StartButton from "@/components/StartButton";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +11,9 @@ export default function Home() {
       {/* 眼睛跟著滑鼠的機器人 */}
       <Robot />
       {/* Start按鈕 */}
-      <StartButton />
+      <Link href={`/chatbot`}>
+        <StartButton />
+      </Link>
     </div>
   );
 }

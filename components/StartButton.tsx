@@ -1,19 +1,30 @@
 "use client";
 
-import { borderGradient } from "@/utils/motion";
+import {
+  startButtonMotion,
+  startButtonHoverSpan,
+  fadeIn,
+} from "@/utils/motion";
 import { motion } from "framer-motion";
 import React from "react";
 
 export default function StartButton() {
   return (
-    <div className="mt-36">
+    <motion.div
+      variants={fadeIn("up", "spring", 0, 1)}
+      initial="hidden"
+      whileInView="show"
+      className="mt-36">
       <motion.div
-        variants={borderGradient}
+        variants={startButtonMotion}
         initial="hidden"
-        animate="animate"
-        className="w-48 m-auto p-1 pl-3 rounded-2xl border-spacing-4 text-4xl font-bold tracking-widest border-4 text-center justify-center text-[#0000FF] border-[#0000FF]">
-        SART
+        whileHover="animate"
+        className=" w-fit m-auto p-3 pl-4 text-4xl text-white font-bold tracking-widest text-center justify-center shadow-md drop-shadow-lg shadow-black rounded-2xl">
+        <div>START</div>
+        <motion.span
+          variants={startButtonHoverSpan}
+          className=" bottom-0 left-0 block h-[2px] w-full  bg-blue-500 content-[''] opacity-0"></motion.span>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

@@ -45,24 +45,38 @@ export const lookAtMouse = (position ,eyes) => ({
 });
 
 
-export const borderGradient = {
+export const startButtonMotion = {
   hidden: {
-    borderColor: "#0000FF",
-    color: "#0000FF",
-    },
-
+  },
   animate: {
-    // border  暗紅 暗橙 暗黃 暗綠 暗藍 暗紫 漸變
-    borderColor: ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#8B00FF"],
-    color: ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#8B00FF"],
+    boxShadow: 'none',
     transition:{
-      duration: 2,
-      ease: "easeOut",
-      repeat: Infinity,
+      duration: 0.5,
+      ease: "ease-out",
     }
-  }
+  },
+}
 
-
+export const startButtonHoverSpan = {
+  hidden: {
+    opacity: 0,
+    // height:"2px",
+    transformOrigin: "bottom right",
+    scaleX: 0,
+    transition:{
+      duration: 0.5,
+      type: "ease-out",
+    }
+  },
+  animate: {
+    opacity: 1,
+    transformOrigin: "bottom left",
+    scaleX: 1,
+    transition:{
+      duration: 0.5,
+      type: "ease-out",
+    }
+  },
 }
 
 export const slideIn = (direction, type, delay, duration) => ({

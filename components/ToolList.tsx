@@ -5,24 +5,13 @@ import { toolListMap } from "../constants/constants";
 import ToolListNavLink from "./ToolListNavLink";
 import { motion } from "framer-motion";
 import { navVariants } from "../utils/motion";
+import Logo from "./Logo";
 
 function ToolList() {
   return (
     <div className="hidden sm:inline flex-auto max-w-[200px] p-5 mx-auto bg-[#020201]  shadow-xl md:max-w-xs">
       {/* Logo */}
-      <motion.div
-        variants={navVariants}
-        initial="hidden"
-        animate="show"
-        className="text-center items-center justify-center font-black text-white text-3xl p-2 mb-8 md:text-5xl md:p-5 md:mb-5">
-        {/* <Image src={Logo} alt="logo" className="w-16 h-16 rounded-full mx-2" /> */}
-        {/* <div className="text-center items-center justify-center"> */}
-        <div>
-          玩轉 <span className=" text-violet-600"> A.I. </span>
-        </div>
-        <div>人工智能</div>
-        {/* </div> */}
-      </motion.div>
+      <Logo />
 
       {/* 工具種類 */}
       <nav className="p-0 md:p-2 w-full">

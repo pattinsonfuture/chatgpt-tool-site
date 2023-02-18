@@ -5,7 +5,7 @@ import Image from "next/image";
 import RobotImg from "@/public/images/8b31156dd7b92df1.png";
 import RobotEye from "@/public/images/a7b8a59cf737f5f1.png";
 import { motion } from "framer-motion";
-import { lookAtMouse } from "@/utils/motion";
+import { fadeIn, lookAtMouse, slideIn } from "@/utils/motion";
 
 function Robot() {
   const [mousePosition, setMousePosition] = useState({
@@ -13,7 +13,7 @@ function Robot() {
     y: 0,
   });
 
-  console.log(mousePosition);
+  // console.log(mousePosition);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
@@ -36,9 +36,18 @@ function Robot() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center relative h-64">
+    <motion.div
+      variants={fadeIn(0, "linear", 0, 1)}
+      initial="hidden"
+      whileInView="show"
+      className="flex items-center justify-center relative h-64">
       {/* 機器人圖片 */}
-      <Image src={RobotImg} alt="robot" className="w-64 h-64 mx-2 absolute" />
+      <Image
+        src={RobotImg}
+        alt="robot"
+        className="w-64 h-64 mx-2 absolute"
+        priority
+      />
       {/* 機器人眼睛 固定在機器人圖片上 */}
       <div className="flex w-32 h-32 relative">
         <motion.div
@@ -56,7 +65,7 @@ function Robot() {
           <Image src={RobotEye} alt="robot-right-eyes" />
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
