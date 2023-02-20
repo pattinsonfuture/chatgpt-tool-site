@@ -51,14 +51,14 @@ function Robot() {
       {/* 機器人眼睛 固定在機器人圖片上 */}
       <div className="flex w-32 h-32 relative">
         <motion.div
-          variants={lookAtMouse(mousePosition, "left")}
+          variants={lookAtMouse(mousePosition)}
           initial="initial"
           animate="look"
           className="w-12 h-12 mx-3 items-center justify-center ">
           <Image src={RobotEye} alt="robot-left-eyes" />
         </motion.div>
         <motion.div
-          variants={lookAtMouse(mousePosition, "right")}
+          variants={lookAtMouse(mousePosition)}
           initial="initial"
           animate="look"
           className="w-12 h-12 mx-3 items-center justify-center">
