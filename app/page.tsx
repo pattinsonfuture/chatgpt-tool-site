@@ -11,7 +11,7 @@ export default function Home() {
       {/* 眼睛跟著滑鼠的機器人 */}
       <Robot />
       {/* Start按鈕 */}
-      <Link href={`/chatbot`}>
+      <Link href={`/chat`}>
         <StartButton />
       </Link>
     </div>

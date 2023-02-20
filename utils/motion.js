@@ -32,11 +32,10 @@ export const navChildrens = {
   }
 }
 
-export const lookAtMouse = (position ,eyes) => ({
+export const lookAtMouse = (position ) => ({
   initial: {
     left: position.x,
     top: position.y,
-    // x: eyes === 'left' ? 0 : eyes === 'right' ? 0 : 0,
   },
   look:{
     translateX: (position.x-0.5)*50,
@@ -182,7 +181,7 @@ export const planetVariants = (direction) => ({
   },
 });
 
-export const zoomIn = (delay, duration) => ({
+export const zoomIn = (delay, duration, startpoint) => ({
   hidden: {
     scale: 0,
     opacity: 0,
@@ -190,6 +189,7 @@ export const zoomIn = (delay, duration) => ({
   show: {
     scale: 1,
     opacity: 1,
+    transformOrigin: startpoint=="left"?"bottom left":startpoint=="right"?"bottom right":"center",
     transition: {
       type: 'tween',
       delay,

@@ -39,8 +39,8 @@ function Robot() {
     <motion.div
       variants={fadeIn(0, "linear", 0, 1)}
       initial="hidden"
-      whileInView="show"
-      className="flex items-center justify-center relative h-64">
+      animate="show"
+      className="flex items-center justify-center relative w-64  h-64 m-auto">
       {/* 機器人圖片 */}
       <Image
         src={RobotImg}

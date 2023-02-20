@@ -8,7 +8,7 @@ function TopNavbar(props: Props) {
 
   return (
     <div className="flex w-full items-center justify-end p-5 h-24">
-      <Cog8ToothIcon className="w-8 h-8 text-neutral-50" />
+      {/* <Cog8ToothIcon className="w-8 h-8 text-neutral-50" /> */}
     </div>
   );
 }
