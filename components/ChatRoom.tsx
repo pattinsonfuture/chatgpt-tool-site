@@ -12,9 +12,10 @@ interface Message {
 }
 
 // 設定預設對話
-const defaultMessages: Message[] = [
-  { message: "歡迎來到玩轉 A.I. 人工智能！", isBot: true },
-];
+const defaultMessages: Message = {
+  message: "歡迎來到玩轉 A.I. 人工智能！",
+  isBot: true,
+};
 
 function ChatRoom() {
   // 記錄對話State，並寫到localStorage
@@ -32,7 +33,7 @@ function ChatRoom() {
 
   // 收到人類送出的Submit，更新對話State
   const handleHumanSubmit = (message: string) => {
-    writeMessages(messages.concat({ message, isBot: false }));
+    writeMessages({ message, isBot: false });
   };
 
   // 重置對話State
@@ -43,9 +44,29 @@ function ChatRoom() {
   };
 
   // 獨立出寫入messages的function，方便重置時使用
-  const writeMessages = (messages: Message[]) => {
-    setMessages(messages);
+  const writeMessages = (message: Message) => {
+    setMessages([...messages, message]);
     localStorage.setItem("ChatRoomMessages", JSON.stringify(messages));
+  };
+
+  // 機器人回應
+  const handleBotSubmit = async (prompt: string) => {
+    // 人類送出訊息後，機器人回應
+    await fetch("/api/sendopenai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt,
+        // chatId,
+        // model,
+        // session
+      }),
+    }).then((res) => {
+      // 機器人回應後，更新對話State
+      writeMessages({ message: String(res.body), isBot: true });
+    });
   };
 
   return (

@@ -17,3 +17,13 @@ type WrittenContent =
 
 type Business = 
 | {label:"介紹產品",slug:"introduce"}
+
+interface MessageRecord {
+    text:string;
+    createdAt:Date;
+    user:{
+        _id:string;
+        name:string;
+        avatar:string;
+    };
+}
