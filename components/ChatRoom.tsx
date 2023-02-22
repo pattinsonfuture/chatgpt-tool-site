@@ -24,12 +24,31 @@ function ChatRoom() {
   // 一開始先讀取localStorage的對話紀錄，為空就設定預設對話
   useEffect(() => {
     const messages = localStorage.getItem("ChatRoomMessages");
+
     if (messages) {
       setMessages(JSON.parse(messages));
     } else {
       writeMessages(defaultMessages);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect監聽對話State，當對話State有變動時，就寫到localStorage
+  useEffect(() => {
+    // 沒有messages且沒有localStorage時，設定預設對話
+    if (messages.length === 0 && !localStorage.getItem("ChatRoomMessages")) {
+      writeMessages(defaultMessages);
+    } else if (messages[messages.length - 1]?.isBot === false) {
+      // 當是人類發問時，請求OpenAI API
+      console.log(messages[messages.length - 1]);
+      handleBotSubmit(messages[messages.length - 1].message);
+    } else if (messages.length > 0) {
+      // 有對話紀錄時，寫到localStorage
+      localStorage.setItem("ChatRoomMessages", JSON.stringify(messages));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
 
   // 收到人類送出的Submit，更新對話State
   const handleHumanSubmit = (message: string) => {
@@ -40,13 +59,11 @@ function ChatRoom() {
   const handleReset = () => {
     setMessages([]);
     localStorage.removeItem("ChatRoomMessages");
-    writeMessages(defaultMessages);
   };
 
   // 獨立出寫入messages的function，方便重置時使用
   const writeMessages = (message: Message) => {
     setMessages([...messages, message]);
-    localStorage.setItem("ChatRoomMessages", JSON.stringify(messages));
   };
 
   // 機器人回應
@@ -59,14 +76,18 @@ function ChatRoom() {
       },
       body: JSON.stringify({
         prompt,
-        // chatId,
+        chatId: 123,
         // model,
         // session
       }),
-    }).then((res) => {
-      // 機器人回應後，更新對話State
-      writeMessages({ message: String(res.body), isBot: true });
-    });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("fetch /api/sendopenai", res);
+
+        // 機器人回應後，更新對話State
+        writeMessages({ message: res.answer, isBot: true });
+      });
   };
 
   return (
