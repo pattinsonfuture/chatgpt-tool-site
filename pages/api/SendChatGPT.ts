@@ -18,7 +18,7 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
     prompt,
     temperature: 0.9,
     top_p: 1,
-    max_tokens: 100,
+    max_tokens: 200,
     frequency_penalty: 0,
     presence_penalty: 0,
     stream: true,

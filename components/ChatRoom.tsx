@@ -4,7 +4,7 @@ import ChatRoomBotMessage from "./ChatRoomBotMessage";
 import ChatRoomPersonMessage from "./ChatRoomPersonMessage";
 import { motion } from "framer-motion";
 import ChatRoomInput from "./ChatRoomInput";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface Message {
   message: string;
@@ -23,6 +23,8 @@ function ChatRoom() {
   // 機器人Loading狀態
   const [loading, setLoading] = useState(false);
   const [thinking, setThinking] = useState("");
+  // 聊天室窗ID滾動用
+  const chatscroll = useRef(null);
 
   // 一開始先讀取localStorage的對話紀錄，為空就設定預設對話
   useEffect(() => {
@@ -54,10 +56,16 @@ function ChatRoom() {
 
   // 機器人思考時，顯示思考中的文字
   useEffect(() => {
+    if (loading && chatscroll !== null) {
+      // 持續滾動到最底
+      chatscroll.current.scrollTop = chatscroll.current.scrollHeight;
+    }
+
     if (loading && !thinking) {
       // 機器人思考中，顯示thinking... 先製造一個對話
       writeMessages({ message: "thinking...", isBot: true });
     } else if (loading && thinking) {
+      // 取代thinking...，顯示思考中的文字
       const newMessages = [...messages];
       newMessages.pop();
       setMessages([...newMessages, { message: thinking, isBot: true }]);
@@ -125,7 +133,9 @@ function ChatRoom() {
       <motion.div className="min-h-[72vh]">
         {/* 聊天對話內容 */}
         <div className="flex-1 mb-5 justify-end flex flex-col h-[72vh] font-mono">
-          <div className="flex flex-col space-y-4 overflow-y-auto scrollbar">
+          <div
+            ref={chatscroll}
+            className="flex flex-col space-y-4 overflow-y-auto scrollbar">
             {/* 使用State的對話紀錄 */}
             {messages.map((message, index) => {
               if (message.isBot) {
