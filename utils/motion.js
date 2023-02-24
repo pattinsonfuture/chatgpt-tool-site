@@ -185,13 +185,13 @@ export const zoomIn = (delay, duration, startpoint) => ({
   hidden: {
     scale: 0,
     opacity: 0,
+    transformOrigin: startpoint=="left"?"top right":startpoint=="right"?"top left":"center",
   },
   show: {
     scale: 1,
-    opacity: 1,
+    opacity: 1,    
     transformOrigin: startpoint=="left"?"bottom left":startpoint=="right"?"bottom right":"center",
     transition: {
-      type: 'tween',
       delay,
       duration,
       ease: 'easeOut',

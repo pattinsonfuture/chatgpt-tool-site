@@ -4,6 +4,6 @@ const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(config);
+const OpenAIConfig = new OpenAIApi(config);
 
-export default openai;
+export default OpenAIConfig;

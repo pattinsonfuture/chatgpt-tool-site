@@ -4,7 +4,7 @@ import ChatRoomBotMessage from "./ChatRoomBotMessage";
 import ChatRoomPersonMessage from "./ChatRoomPersonMessage";
 import { motion } from "framer-motion";
 import ChatRoomInput from "./ChatRoomInput";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 interface Message {
   message: string;
@@ -20,6 +20,9 @@ const defaultMessages: Message = {
 function ChatRoom() {
   // 記錄對話State，並寫到localStorage
   const [messages, setMessages] = useState<Message[]>([]);
+  // 機器人Loading狀態
+  const [loading, setLoading] = useState(false);
+  const [thinking, setThinking] = useState("");
 
   // 一開始先讀取localStorage的對話紀錄，為空就設定預設對話
   useEffect(() => {
@@ -33,7 +36,7 @@ function ChatRoom() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect監聽對話State，當對話State有變動時，就寫到localStorage
+  // useLayoutEffect監聽對話State，當對話State有變動時，就寫到localStorage
   useEffect(() => {
     // 沒有messages且沒有localStorage時，設定預設對話
     if (messages.length === 0 && !localStorage.getItem("ChatRoomMessages")) {
@@ -46,9 +49,23 @@ function ChatRoom() {
       // 有對話紀錄時，寫到localStorage
       localStorage.setItem("ChatRoomMessages", JSON.stringify(messages));
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
+
+  // 機器人思考時，顯示思考中的文字
+  useEffect(() => {
+    if (loading && !thinking) {
+      // 機器人思考中，顯示thinking... 先製造一個對話
+      writeMessages({ message: "thinking...", isBot: true });
+    } else if (loading && thinking) {
+      const newMessages = [...messages];
+      newMessages.pop();
+      setMessages([...newMessages, { message: thinking, isBot: true }]);
+    } else {
+      setThinking("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [thinking, loading]);
 
   // 收到人類送出的Submit，更新對話State
   const handleHumanSubmit = (message: string) => {
@@ -69,25 +86,38 @@ function ChatRoom() {
   // 機器人回應
   const handleBotSubmit = async (prompt: string) => {
     // 人類送出訊息後，機器人回應
-    await fetch("/api/sendopenai", {
+    const response = await fetch("/api/SendChatGPT", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         prompt,
-        chatId: 123,
-        // model,
-        // session
       }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("fetch /api/sendopenai", res);
+    });
 
-        // 機器人回應後，更新對話State
-        writeMessages({ message: res.answer, isBot: true });
-      });
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
+    }
+
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let done = false;
+    setLoading(true);
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      setThinking((prev) => prev + chunkValue);
+    }
+
+    if (done) {
+      // 機器人回應完成，寫入對話State
+      setLoading(false);
+    }
   };
 
   return (
