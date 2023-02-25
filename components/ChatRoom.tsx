@@ -4,7 +4,7 @@ import ChatRoomBotMessage from "./ChatRoomBotMessage";
 import ChatRoomPersonMessage from "./ChatRoomPersonMessage";
 import { motion } from "framer-motion";
 import ChatRoomInput from "./ChatRoomInput";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 interface Message {
   message: string;
@@ -132,7 +132,7 @@ function ChatRoom() {
         {/* 聊天對話內容 */}
         <div className="flex-1 mb-5 justify-end flex flex-col h-[72vh] font-mono">
           <div
-            ref={chatscroll}
+            ref={chatscroll as MutableRefObject<HTMLDivElement>}
             className="flex flex-col space-y-4 overflow-y-auto scrollbar">
             {/* 使用State的對話紀錄 */}
             {messages.map((message, index) => {
