@@ -20,12 +20,12 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
 
   const payload: OpenAIStreamPayload = {
     model:"text-davinci-003",
-    prompt:"以下是與AI的對話。AI樂於助人，富有創造力，聰明且非常友好。\n\n" + history + "\nAI:",
-    temperature: 0.9,
+    prompt:history + "\nAI:",
+    temperature: 0.7,
     top_p: 1,
-    max_tokens: 150,
+    max_tokens: 500,
     frequency_penalty: 0,
-    presence_penalty: 0.6,
+    presence_penalty: 0,
     stream: true,
     n: 1,
     stop: ["人類:", "AI:"],
