@@ -99,6 +99,13 @@ function ChatRoom() {
       },
       body: JSON.stringify({
         prompt,
+        // 將對話紀錄轉成字串，刪到剩下800個字的內容
+        history: messages
+          .map(({ message, isBot }) =>
+            isBot ? `AI:${message}\n` : `人類:${message}\n`
+          )
+          .join("")
+          .slice(-800),
       }),
     });
 

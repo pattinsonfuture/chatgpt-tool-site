@@ -15,6 +15,7 @@ export interface OpenAIStreamPayload {
   max_tokens: number;
   stream: boolean;
   n: number;
+  stop: string[] | string;
 }
 
 const QueryStream = async (payload:OpenAIStreamPayload) => {

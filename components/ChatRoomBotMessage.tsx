@@ -23,13 +23,13 @@ function ChatRoomBotMessage({ message }: ChatRoomBotMessageProps) {
             </span>
           </div>
         </div>
-        <div className="w-6 h-6 rounded-full order-1">
+        <div className="rounded-full order-1">
           <Image
             width="24"
             height="24"
             src={RobotWithEyes}
             alt="Bot profile"
-            className="w-6 h-6 rounded-full order-1"
+            className="w-[20px] h-[20px] rounded-full order-1 sm:w-6 sm:h-6"
           />
         </div>
       </div>
