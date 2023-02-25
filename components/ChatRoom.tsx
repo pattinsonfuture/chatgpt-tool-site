@@ -24,7 +24,7 @@ function ChatRoom() {
   const [loading, setLoading] = useState(false);
   const [thinking, setThinking] = useState("");
   // 聊天室窗ID滾動用
-  const chatscroll = useRef(null);
+  const chatscroll = useRef<HTMLElement>(null);
 
   // 一開始先讀取localStorage的對話紀錄，為空就設定預設對話
   useEffect(() => {
@@ -51,16 +51,14 @@ function ChatRoom() {
       // 有對話紀錄時，寫到localStorage
       localStorage.setItem("ChatRoomMessages", JSON.stringify(messages));
     }
+
+    chatscroll.current?.scrollTo(0, chatscroll.current.scrollHeight);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
 
   // 機器人思考時，顯示思考中的文字
   useEffect(() => {
-    if (loading && chatscroll !== null) {
-      // 持續滾動到最底
-      chatscroll.current.scrollTop = chatscroll.current.scrollHeight;
-    }
-
     if (loading && !thinking) {
       // 機器人思考中，顯示thinking... 先製造一個對話
       writeMessages({ message: "thinking...", isBot: true });
