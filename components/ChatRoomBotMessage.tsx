@@ -4,6 +4,7 @@ import Image from "next/image";
 import RobotWithEyes from "@/public/images/c07aa58e518a0a01.png";
 import { motion } from "framer-motion";
 import { zoomIn } from "@/utils/motion";
+import ReactMarkdown from "react-markdown";
 
 interface ChatRoomBotMessageProps {
   message: string;
@@ -16,11 +17,13 @@ function ChatRoomBotMessage({ message }: ChatRoomBotMessageProps) {
       initial="hidden"
       animate="show">
       <div className="flex items-end">
-        <div className="flex flex-col space-y-2 max-w-xs mx-2 order-2 items-start">
+        <div className="flex flex-col space-y-2 lg:max-w-4xl mx-2 order-2 items-start">
           <div>
-            <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-              {message}
-            </span>
+            <div className="px-5 py-5 rounded-lg inline-block bg-gray-300 text-gray-600 prose lg:prose-xl">
+              <ReactMarkdown className="prose lg:prose-xl">
+                {message}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
         <div className="rounded-full order-1">

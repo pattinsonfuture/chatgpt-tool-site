@@ -105,7 +105,7 @@ function ChatRoom() {
             isBot ? `你:${message}\n` : `我:${message}\n`
           )
           .join("")
-          .slice(-800),
+          .slice(-1000),
       }),
     });
 

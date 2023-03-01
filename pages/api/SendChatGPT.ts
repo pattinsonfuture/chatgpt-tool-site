@@ -21,9 +21,8 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
   const payload: OpenAIStreamPayload = {
     model:"text-davinci-003",
     prompt:history + "\n你:",
-    temperature: 0.9,
-    top_p: 1,
-    max_tokens: 500,
+    temperature: 0.5,
+    max_tokens: 1000,
     frequency_penalty: 0,
     presence_penalty: 0,
     stream: true,
