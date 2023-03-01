@@ -12,10 +12,10 @@ interface Message {
 }
 
 // 設定預設對話
-const defaultMessages: Message = {
-  message: "歡迎來到玩轉 A.I. 人工智能！",
-  isBot: true,
-};
+// const defaultMessages: Message = {
+//   message: "歡迎來到玩轉 A.I. 人工智能！",
+//   isBot: true,
+// };
 
 function ChatRoom() {
   // 記錄對話State，並寫到localStorage
@@ -33,7 +33,7 @@ function ChatRoom() {
     if (messages) {
       setMessages(JSON.parse(messages));
     } else {
-      writeMessages(defaultMessages);
+      // writeMessages(defaultMessages);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -42,7 +42,7 @@ function ChatRoom() {
   useEffect(() => {
     // 沒有messages且沒有localStorage時，設定預設對話
     if (messages.length === 0 && !localStorage.getItem("ChatRoomMessages")) {
-      writeMessages(defaultMessages);
+      // writeMessages(defaultMessages);
     } else if (messages[messages.length - 1]?.isBot === false) {
       // 當是人類發問時，請求OpenAI API
       console.log(messages[messages.length - 1]);
@@ -102,7 +102,7 @@ function ChatRoom() {
         // 將對話紀錄轉成字串，刪到剩下800個字的內容
         history: messages
           .map(({ message, isBot }) =>
-            isBot ? `AI:${message}\n` : `人類:${message}\n`
+            isBot ? `你:${message}\n` : `我:${message}\n`
           )
           .join("")
           .slice(-800),

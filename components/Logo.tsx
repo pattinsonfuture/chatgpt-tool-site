@@ -16,9 +16,9 @@ function Logo() {
         {/* <Image src={Logo} alt="logo" className="w-16 h-16 rounded-full mx-2" /> */}
         {/* <div className="text-center items-center justify-center"> */}
         <div>
-          玩轉 <span className=" text-violet-600"> A.I. </span>
+          Chat<span className=" text-violet-600"> GPT</span>
         </div>
-        <div>人工智能</div>
+        <div>工具箱</div>
         {/* </div> */}
       </motion.div>
     </Link>

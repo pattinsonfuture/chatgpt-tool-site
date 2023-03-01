@@ -1,5 +1,9 @@
 import ChatRoom from "@/components/ChatRoom";
-import ChatRoomInput from "@/components/ChatRoomInput";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "聊天",
+};
 
 export default function Home() {
   return (
