@@ -46,6 +46,7 @@ export const lookAtMouse = (position ) => ({
 
 export const startButtonMotion = {
   hidden: {
+    boxShadow: 'rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0) 0px 4px 6px -1px, rgb(0 0 0) 0px 2px 4px -2px',
   },
   animate: {
     boxShadow: 'none',

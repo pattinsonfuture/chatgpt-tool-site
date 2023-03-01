@@ -19,7 +19,7 @@ export default function StartButton() {
         variants={startButtonMotion}
         initial="hidden"
         whileHover="animate"
-        className=" w-fit m-auto p-3 pl-4 text-4xl text-white font-bold tracking-widest text-center justify-center shadow-md drop-shadow-lg shadow-black rounded-2xl">
+        className=" w-fit m-auto p-3 pl-4 text-4xl text-white font-bold tracking-widest text-center justify-center rounded-2xl">
         <div>START</div>
         <motion.span
           variants={startButtonHoverSpan}

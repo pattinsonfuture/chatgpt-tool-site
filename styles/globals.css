@@ -9,7 +9,7 @@
   }
 
   .scrollbar::-webkit-scrollbar-track {
-    box-shadow: inset  2px 1px  rgba(0, 0, 0, 0.199);
+    box-shadow: inset  2px 1px  #000000;
     border-radius: 70vh;
     background: #333134;
   }

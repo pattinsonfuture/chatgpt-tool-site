@@ -3,8 +3,6 @@
 import React from "react";
 import { toolListMap } from "../constants/constants";
 import ToolListNavLink from "./ToolListNavLink";
-import { motion } from "framer-motion";
-import { navVariants } from "../utils/motion";
 import Logo from "./Logo";
 
 function ToolList() {
