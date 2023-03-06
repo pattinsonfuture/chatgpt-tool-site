@@ -29,7 +29,7 @@ function ToolListNavLink({ toollists }: Props) {
       </motion.div>
       <div className="ml-6 md:ml-8">
         {toollists.lists.map((toollist) => (
-          <Link key={toollist.slug} href={`/${toollist.slug}`}>
+          <Link key={toollist.slug} href={`/toolbox/${toollist.slug}`}>
             <motion.div
               variants={navChildrens}
               // animate="show"

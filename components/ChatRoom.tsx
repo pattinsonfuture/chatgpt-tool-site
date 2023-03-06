@@ -5,6 +5,8 @@ import ChatRoomPersonMessage from "./ChatRoomPersonMessage";
 import { motion } from "framer-motion";
 import ChatRoomInput from "./ChatRoomInput";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { ChatCompletionsMessages } from "@/lib/StreamChatCompletions ";
 
 interface Message {
   message: string;
@@ -92,22 +94,27 @@ function ChatRoom() {
   // 機器人回應
   const handleBotSubmit = async (prompt: string) => {
     // 人類送出訊息後，機器人回應
-    const response = await fetch("/api/SendChatGPT", {
+    const response = await fetch("/api/SendChatCompletions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user
       body: JSON.stringify({
-        prompt,
-        // 將對話紀錄轉成字串，刪到剩下800個字的內容
-        history: messages
-          .map(({ message, isBot }) =>
-            isBot ? `你:${message}\n` : `我:${message}\n`
-          )
-          .join("")
-          .slice(-1000),
+        messages: messages.map(
+          (message): ChatCompletionsMessages => ({
+            role: message.isBot ? "assistant" : "user",
+            content: message.message,
+          })
+        ),
       }),
     });
+
+    // response錯誤時，顯示錯誤訊息
+    if (!response.ok) {
+      toast.error("機器人出錯了，請稍後再試");
+      return;
+    }
 
     // This data is a ReadableStream
     const data = response.body;
@@ -119,6 +126,7 @@ function ChatRoom() {
     const decoder = new TextDecoder();
     let done = false;
     setLoading(true);
+    const notification = toast.loading("機器人思考中...");
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
@@ -130,6 +138,7 @@ function ChatRoom() {
     if (done) {
       // 機器人回應完成，寫入對話State
       setLoading(false);
+      toast.success("機器人回應完成", { id: notification });
     }
   };
 

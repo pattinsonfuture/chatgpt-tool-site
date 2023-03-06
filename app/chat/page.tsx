@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "聊天",
 };
 
-export default function Home() {
+export default function page() {
   return (
     <div className="p-1 sm:p-5">
       <ChatRoom />

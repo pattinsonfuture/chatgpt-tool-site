@@ -20,8 +20,8 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
 
   const payload: OpenAIStreamPayload = {
     model:"text-davinci-003",
-    prompt:history + "\n你:",
-    temperature: 0.5,
+    prompt:"如果需要列表或代碼，你都會用markdown格式回覆\n"+history + "\n你:",
+    temperature: 0.1,
     max_tokens: 1000,
     frequency_penalty: 0,
     presence_penalty: 0,

@@ -3,6 +3,7 @@ import ToolList from "@/components/ToolList";
 import localFont from "@next/font/local";
 import TopNavbar from "@/components/TopNavbar";
 import { Metadata } from "next";
+import ClientProvider from "@/components/ClientProvider";
 
 const myFont = localFont({ src: "../public/fonts/Cubic_11_1.013_R.woff2" });
 
@@ -59,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={myFont.className}>
       <body className="flex flex-row min-h-screen">
+        <ClientProvider />
         {/* 左側Navbar 工具列表 */}
         <ToolList />
 
@@ -66,6 +68,7 @@ export default function RootLayout({
         <div className="flex-auto bg-gradient-to-br from-[#3C3A3C] to-[#333134]">
           {/* 頂部按鈕列 */}
           <TopNavbar />
+
           {children}
         </div>
 
