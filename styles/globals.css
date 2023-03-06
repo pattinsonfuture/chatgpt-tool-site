@@ -12,12 +12,15 @@
     box-shadow: inset  2px 1px  #000000;
     border-radius: 70vh;
     background: #333134;
+    
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #000000;
+    background: #191125;
     border-radius: 100vh;
     /* border: 3px solid #f6f7ed; */
+    
+    transform: translateX(10px);
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {

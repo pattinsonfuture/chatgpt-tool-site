@@ -1,5 +1,5 @@
 "use client";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ClientProvider() {
   return (
@@ -10,7 +10,10 @@ export default function ClientProvider() {
         reverseOrder={false}
         toastOptions={{
           // Define default options
-          className: "bg-gray-800 text-white",
+          style: {
+            background: "#232324",
+            color: "#fff",
+          },
         }}
       />
     </>

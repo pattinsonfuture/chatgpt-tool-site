@@ -99,9 +99,9 @@ function ChatRoom() {
       headers: {
         "Content-Type": "application/json",
       },
-      // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user
+      // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user 取最後五段話
       body: JSON.stringify({
-        messages: messages.map(
+        messages: messages.slice(-10).map(
           (message): ChatCompletionsMessages => ({
             role: message.isBot ? "assistant" : "user",
             content: message.message,

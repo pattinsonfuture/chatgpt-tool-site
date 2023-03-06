@@ -21,7 +21,7 @@ const SendChatCompletions = async (req: Request): Promise<Response> => {
   const payload: OpenAIChatCompletionsPayload = {
     model:"gpt-3.5-turbo",
     messages: [
-      { "role":"system","content":"如果需要列表或代碼，你都會用markdown格式回覆" },
+      // { "role":"system","content":"如果需要列表或代碼，你都會用markdown格式回覆" },
       ...messages
     ],
     temperature: 0.7,
