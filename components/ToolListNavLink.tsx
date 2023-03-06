@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { navVariants, navChildrens } from "../utils/motion";
 import { usePathname } from "next/navigation";
+import { ToolLists } from "@/constants/typings";
 
 type Props = {
   toollists: ToolLists;
@@ -28,7 +29,7 @@ function ToolListNavLink({ toollists }: Props) {
         {toollists.category}
       </motion.div>
       <div className="ml-6 md:ml-8">
-        {toollists.lists.map((toollist) => (
+        {toollists.lists.map((toollist: any) => (
           <Link key={toollist.slug} href={`/toolbox/${toollist.slug}`}>
             <motion.div
               variants={navChildrens}

@@ -1,21 +1,11 @@
 // import openai from "./OpenAIConfig";
+import { OpenAIStreamPayload } from "@/constants/typings";
 import {
     createParser,
     ParsedEvent,
     ReconnectInterval,
   } from "eventsource-parser";
 
-export interface OpenAIStreamPayload {
-  model: string;
-  prompt: string;
-  temperature: number;
-  frequency_penalty: number;
-  presence_penalty: number;
-  max_tokens: number;
-  stream: boolean;
-  n: number;
-  stop: string[] | string;
-}
 
 const QueryStream = async (payload:OpenAIStreamPayload) => {
     // console.log('QueryStream', prompt);

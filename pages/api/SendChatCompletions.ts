@@ -1,4 +1,5 @@
-import StreamChatCompletions, { ChatCompletionsMessages, OpenAIChatCompletionsPayload } from '@/lib/StreamChatCompletions ';
+import { ChatCompletionsMessages, OpenAIChatCompletionsPayload } from '@/constants/typings';
+import StreamChatCompletions from '@/lib/StreamChatCompletions ';
 
 export const config = {
   runtime: "edge",

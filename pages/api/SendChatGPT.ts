@@ -1,4 +1,5 @@
-import QueryStream, { OpenAIStreamPayload } from '@/lib/QueryStream';
+import { OpenAIStreamPayload } from '@/constants/typings';
+import QueryStream from '@/lib/QueryStream';
 
 export const config = {
   runtime: "edge",

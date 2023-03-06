@@ -1,24 +1,11 @@
+import { OpenAIChatCompletionsPayload } from "@/constants/typings";
 import {
     createParser,
     ParsedEvent,
     ReconnectInterval,
   } from "eventsource-parser";
 
-export interface ChatCompletionsMessages {
-  role: string;
-  content: string;
-}
 
-export interface OpenAIChatCompletionsPayload {
-  model: string;
-  messages: ChatCompletionsMessages[];
-  temperature: number;
-  n: number;
-  stream: boolean;
-  max_tokens: number;
-  frequency_penalty: number;
-  presence_penalty: number;
-}
 
 const StreamChatCompletions = async (payload:OpenAIChatCompletionsPayload) => {
     // console.log('QueryStream', prompt);

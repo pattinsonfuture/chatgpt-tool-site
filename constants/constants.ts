@@ -1,3 +1,5 @@
+import { ToolLists } from "./typings";
+
 export const toolListMap: ToolLists[] = [
     {
         category:"程式語言",

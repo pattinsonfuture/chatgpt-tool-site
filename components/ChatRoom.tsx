@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import ChatRoomInput from "./ChatRoomInput";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { ChatCompletionsMessages } from "@/lib/StreamChatCompletions ";
+import { ChatCompletionsMessages } from "@/constants/typings";
 
 interface Message {
   message: string;
