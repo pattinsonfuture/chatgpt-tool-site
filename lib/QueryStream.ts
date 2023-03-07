@@ -22,6 +22,9 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
       method: "POST",
       body: JSON.stringify(payload),
     });
+    
+    console.log("payload", payload);
+    
 
     // const res = await openai.createCompletion({
     //   model:"text-davinci-003",
@@ -48,7 +51,7 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
             }
             try {
               const json = JSON.parse(data);
-              const text = json.choices[0].text;
+              const text = json.choices[0].text ?? "";
               if (counter < 2 && (text.match(/\n/) || []).length) {
                 // this is a prefix character (i.e., "\n\n"), do nothing
                 return;
@@ -69,6 +72,8 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
         // https://web.dev/streams/#asynchronous-iteration
         
         for await (const chunk of res.body as any) {
+          console.log('chunk', decoder.decode(chunk));
+          
           parser.feed(decoder.decode(chunk));
         }
       },
