@@ -1,33 +1,25 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import IntroduceForm from "./IntroduceForm";
 import RobotResponseCard from "./RobotResponseCard";
 import toast from "react-hot-toast";
+import {
+  toolboxcategory,
+  CombinedFormInput,
+} from "@/constants/toolbox-typings";
+import ToolboxChooseForm from "./ToolboxChooseForm";
+import { ChoosePrompt } from "@/lib/ChoosePrompt";
 
-export interface Form {
-  product_name: string;
-  introductory_tone: string;
-  ingredients: string;
-  length: number;
-  other: string;
-}
-
-function Introduce() {
-  const [form, setForm] = useState<Form>({
-    product_name: "",
-    introductory_tone: "",
-    ingredients: "",
-    length: 0,
-    other: "",
-  });
+function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
+  const [form, setForm] = useState<CombinedFormInput>({} as CombinedFormInput);
   const [thinking, setThinking] = useState("");
   const [loading, setLoading] = useState(false);
 
   // form送出請求
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit", form);
+    // 送出前先清空機器人回應
+    setThinking("");
 
     const response = await fetch("/api/SendChatGPT", {
       method: "POST",
@@ -36,7 +28,7 @@ function Introduce() {
       },
       // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user 取最後五段話
       body: JSON.stringify({
-        prompt: `老闆:用${form.introductory_tone}的語氣描述「${form.product_name}」，列舉成分${form.ingredients}的效益，並且使用${form.length}個字。${form.other}\n你:`,
+        prompt: ChoosePrompt(toolboxcategory, form),
       }),
     });
 
@@ -84,10 +76,11 @@ function Introduce() {
   };
   return (
     <>
-      <IntroduceForm
-        handleSubmit={handleSubmit}
-        form={form}
+      <ToolboxChooseForm
+        toolboxcategory={toolboxcategory}
         setForm={setForm}
+        form={form}
+        handleSubmit={handleSubmit}
       />
       <RobotResponseCard
         message={thinking}
@@ -98,4 +91,4 @@ function Introduce() {
   );
 }
 
-export default Introduce;
+export default Toolbox;

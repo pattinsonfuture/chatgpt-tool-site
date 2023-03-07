@@ -1,4 +1,4 @@
-import Introduce from "@/components/Introduce";
+import Toolbox from "@/components/Toolbox";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <>
-      <Introduce />
+      <Toolbox toolboxcategory="introduce" />
     </>
   );
 }

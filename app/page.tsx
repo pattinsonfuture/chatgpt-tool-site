@@ -1,6 +1,11 @@
 import Robot from "@/components/Robot";
 import StartButton from "@/components/StartButton";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "首頁",
+};
 
 export default function Home() {
   return (

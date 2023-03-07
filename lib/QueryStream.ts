@@ -23,7 +23,7 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
       body: JSON.stringify(payload),
     });
     
-    console.log("payload", payload);
+    // console.log("payload", payload);
     
 
     // const res = await openai.createCompletion({
@@ -72,7 +72,7 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
         // https://web.dev/streams/#asynchronous-iteration
         
         for await (const chunk of res.body as any) {
-          console.log('chunk', decoder.decode(chunk));
+          // console.log('chunk', decoder.decode(chunk));
           
           parser.feed(decoder.decode(chunk));
         }
