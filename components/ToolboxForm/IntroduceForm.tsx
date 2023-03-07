@@ -2,7 +2,6 @@
 
 import {
   CombinedFormInput,
-  IntroduceFormInput,
   ToolboxChooseFormProps,
 } from "@/constants/toolbox-typings";
 import { useEffect } from "react";

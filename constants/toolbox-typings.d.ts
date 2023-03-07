@@ -10,7 +10,7 @@ export type toolboxcategory =
 | "regex"
 ;
 
-export type CombinedFormInput = IntroduceFormInput & PressreleaseFormInput ;
+export type CombinedFormInput = IntroduceFormInput & PressreleaseFormInput & CaptureFormInput;
 
 export interface ToolboxChooseFormProps {
     toolboxcategory: toolboxcategory;
@@ -30,4 +30,8 @@ export interface IntroduceFormInput {
 export interface PressreleaseFormInput {
     title: string;
     keywords: string;
-  }
+}
+
+export interface CaptureFormInput {
+    content: string;
+}

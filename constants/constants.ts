@@ -16,7 +16,7 @@ export const toolListMap: ToolLists[] = [
         category:"撰寫文章",
         lists:[
             {label:"擷取摘要",slug:"capture"},
-            {label:"撰寫新聞稿",slug:"pressrelease"},
+            {label:"生成新聞稿",slug:"pressrelease"},
         ]
     },
     {

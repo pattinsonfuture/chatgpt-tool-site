@@ -13,7 +13,7 @@ type Program =
 
 type WrittenContent = 
 | {label:"擷取摘要",slug:"capture"}
-| {label:"撰寫新聞稿",slug:"pressrelease"}
+| {label:"生成新聞稿",slug:"pressrelease"}
 
 type Business = 
 | {label:"介紹產品",slug:"introduce"}
