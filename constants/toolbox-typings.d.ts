@@ -2,15 +2,15 @@ export type toolboxcategory =
 | "introduce"
 | "pressrelease"
 | "capture"
-| "commands"
-| "clean"
-| "convert"
-| "fix"
-| "interpret"
-| "regex"
+| "code-commands"
+| "code-clean"
+| "code-convert"
+| "code-fix"
+| "code-interpret"
+| "code-regex"
 ;
 
-export type CombinedFormInput = IntroduceFormInput & PressreleaseFormInput & CaptureFormInput;
+export type CombinedFormInput = IntroduceFormInput & PressreleaseFormInput & CaptureFormInput & CodeInterpretFormInput;
 
 export interface ToolboxChooseFormProps {
     toolboxcategory: toolboxcategory;
@@ -34,4 +34,9 @@ export interface PressreleaseFormInput {
 
 export interface CaptureFormInput {
     content: string;
+}
+
+export interface CodeInterpretFormInput {
+    language: string;
+    code: string;
 }

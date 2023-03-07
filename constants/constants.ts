@@ -4,12 +4,12 @@ export const toolListMap: ToolLists[] = [
     {
         category:"程式語言",
         lists:[
-            {label:"解釋程式",slug:"interpret"},
-            {label:"修正程式",slug:"fix"},
-            {label:"Commands",slug:"commands"},
-            {label:"程式簡潔化",slug:"clean"},
-            {label:"重構程式",slug:"convert"},
-            {label:"正規表達式",slug:"regex"},
+            {label:"解釋程式",slug:"code-interpret"},
+            {label:"修正程式",slug:"code-fix"},
+            {label:"code-commands",slug:"code-commands"},
+            {label:"程式簡潔化",slug:"code-clean"},
+            {label:"重構程式",slug:"code-convert"},
+            {label:"正規表達式",slug:"code-regex"},
         ]
     },
     {

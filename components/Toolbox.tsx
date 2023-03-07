@@ -21,16 +21,23 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
     // 送出前先清空機器人回應
     setThinking("");
 
-    const response = await fetch("/api/SendChatGPT", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user 取最後五段話
-      body: JSON.stringify({
-        prompt: ChoosePrompt(toolboxcategory, form),
-      }),
-    });
+    const notification = toast.loading("機器人思考中...");
+    // 是否需要請求code api，字串內有包含code就需要
+    let needCode = toolboxcategory.includes("code");
+
+    const response = await fetch(
+      needCode ? "/api/SendCodeGPT" : "/api/SendChatGPT",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user 取最後五段話
+        body: JSON.stringify({
+          prompt: ChoosePrompt(toolboxcategory, form),
+        }),
+      }
+    );
 
     // response錯誤時，顯示錯誤訊息
     if (!response.ok) {
@@ -48,7 +55,6 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
     const decoder = new TextDecoder();
     let done = false;
     setLoading(true);
-    const notification = toast.loading("機器人思考中...");
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();

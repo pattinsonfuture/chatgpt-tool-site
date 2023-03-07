@@ -9,17 +9,17 @@ export const ChoosePrompt = (toolboxcategory:toolboxcategory,form:CombinedFormIn
         return `老闆:新聞標題為「${form.title}」，關鍵字有${form.keywords}，撰寫一篇新聞內容。\n你:`
     }else if (toolboxcategory === "capture") {
         return `老闆:「${form.content}」總結文章的摘要。\n你:`
-    }else if (toolboxcategory === "commands") {
+    }else if (toolboxcategory === "code-commands") {
         return `老闆:請輸入你想要執行的指令。\n你:`
-    }else if (toolboxcategory === "clean") {
+    }else if (toolboxcategory === "code-clean") {
         return `老闆:請輸入你想要簡潔化的程式碼。\n你:`
-    }else if (toolboxcategory === "convert") {
+    }else if (toolboxcategory === "code-convert") {
         return `老闆:請輸入你想要重構的程式碼。\n你:`
-    }else if (toolboxcategory === "fix") {
+    }else if (toolboxcategory === "code-fix") {
         return `老闆:請輸入你想要修正的程式碼。\n你:`
-    }else if (toolboxcategory === "interpret") {
-        return `老闆:請輸入你想要解釋的程式碼。\n你:`
-    }else if (toolboxcategory === "regex") {
+    }else if (toolboxcategory === "code-interpret") {
+        return `${form.code}\n\n\"\"\"\n精簡解釋以上 ${form.language} 程式碼的意思:\n\"\"\"\n解釋:\n`
+    }else if (toolboxcategory === "code-regex") {
         return `老闆:請輸入你想要使用的正規表達式。\n你:`
     }
     return `老闆:寫一篇關於「${form.title}」的新聞內容，關鍵字有${form.keywords}。\n你:`
