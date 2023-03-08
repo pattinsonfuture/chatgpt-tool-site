@@ -62,9 +62,7 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
               controller.enqueue(queue);
               counter++;
             } catch (e) {
-              // maybe parse error
-              console.log("error", e);
-              
+              // maybe parse error              
               controller.error(e);
             }
           }
@@ -76,11 +74,22 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
         // https://web.dev/streams/#asynchronous-iteration        
         
         for await (const chunk of res.body as any) {
-          console.log('chunk', decoder.decode(chunk));
+          let chunkdata = decoder.decode(chunk);
+          console.log('chunk', chunkdata,typeof(chunkdata));
           
           
-          parser.feed(decoder.decode(chunk));
+          parser.feed(chunkdata);
         }
+      },
+
+      async cancel() {
+        console.log("cancel");
+        // res.body.cancel();
+      },
+
+      async pull(controller) {
+        console.log("pull");
+        // res.body.cancel();
       },
     });
 

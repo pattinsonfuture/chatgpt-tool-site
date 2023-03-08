@@ -1,22 +1,33 @@
 import {
   ArrowPathIcon,
   DocumentDuplicateIcon,
+  ForwardIcon,
 } from "@heroicons/react/24/solid";
-import React from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Robot from "./Robot";
 
 interface RobotResponseCardProps {
   message: string;
   handleReset: () => void;
   handleCopy: () => void;
+  handleContinue: () => void;
 }
 
 function RobotResponseCard({
   message,
   handleReset,
   handleCopy,
+  handleContinue,
 }: RobotResponseCardProps) {
+  const responsescroll = useRef<HTMLElement>(null);
+
+  // 輸入訊息時，自動滾動到最下方
+  useEffect(() => {
+    responsescroll.current?.scrollTo(0, responsescroll.current.scrollHeight);
+  }, [message]);
+
   return (
     <div>
       <div className="p-10">
@@ -28,10 +39,12 @@ function RobotResponseCard({
               <Robot />
             </div> */}
             {/* <div className="max-w-md mx-auto"> */}
-            <div className="pr-4 flex-col  h-[60vh]  overflow-y-auto scrollbar">
-              <div className="mt-[10vh]">
-                <ReactMarkdown>{message}</ReactMarkdown>
-              </div>
+            <div
+              ref={responsescroll as MutableRefObject<HTMLDivElement>}
+              className="pr-4 flex-col  h-[60vh]  overflow-y-auto scrollbar prose text-slate-100">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {message}
+              </ReactMarkdown>
             </div>
             {/* 重製按鈕 跟 複製按鈕 flex分開左右 */}
             <div className="flex justify-between">
@@ -41,6 +54,13 @@ function RobotResponseCard({
                 type="button"
                 className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                 <ArrowPathIcon className="w-6 h-6" />
+              </button>
+              <button
+                onClick={handleContinue}
+                aria-label="continue"
+                type="button"
+                className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                <ForwardIcon className="w-6 h-6" />
               </button>
               <button
                 onClick={handleCopy}

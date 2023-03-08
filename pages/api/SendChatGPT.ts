@@ -23,6 +23,7 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
     presence_penalty: 0,
     stream: true,
     n: 1,
+    top_p: 1,
     stop: ["老闆:", "你:"],
   };
 

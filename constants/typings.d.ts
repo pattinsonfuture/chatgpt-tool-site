@@ -37,6 +37,7 @@ export interface OpenAIStreamPayload {
     max_tokens: number;
     stream: boolean;
     n: number;
+    top_p: number;
     stop: string[] | string;
 }
 

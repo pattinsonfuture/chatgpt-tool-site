@@ -18,7 +18,7 @@ export const ChoosePrompt = (toolboxcategory:toolboxcategory,form:CombinedFormIn
     }else if (toolboxcategory === "code-fix") {
         return `老闆:請輸入你想要修正的程式碼。\n你:`
     }else if (toolboxcategory === "code-interpret") {
-        return `${form.code}\n\n\"\"\"\n精簡解釋以上 ${form.language} 程式碼的意思:\n\"\"\"\n解釋:\n`
+        return `${form.code}\n\n\"\"\"\n解釋以上 ${form.language} 程式碼的意思:\n\"\"\"\n解釋:`
     }else if (toolboxcategory === "code-regex") {
         return `老闆:請輸入你想要使用的正規表達式。\n你:`
     }

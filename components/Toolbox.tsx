@@ -21,6 +21,29 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
     // 送出前先清空機器人回應
     setThinking("");
 
+    let prompt = ChoosePrompt(toolboxcategory, form);
+    sendRequest(prompt);
+  };
+
+  // 重製thinking
+  const handleReset = () => {
+    setThinking("");
+  };
+
+  // 複製thinking文字
+  const handleCopy = () => {
+    navigator.clipboard.writeText(thinking);
+    toast.success("已複製到剪貼簿");
+  };
+
+  // 繼續請求 取得新的thinking
+  const handleContinue = async () => {
+    let prompt = ChoosePrompt(toolboxcategory, form) + thinking;
+    sendRequest(prompt);
+  };
+
+  // 獨立出API請求，方便重複使用
+  const sendRequest = async (prompt: string) => {
     const notification = toast.loading("機器人思考中...");
     // 是否需要請求code api，字串內有包含code就需要
     let needCode = toolboxcategory.includes("code");
@@ -34,14 +57,14 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
         },
         // messages 送出是使用ChatCompletionsMessage的interface 機器人role是assistant 人類role是user 取最後五段話
         body: JSON.stringify({
-          prompt: ChoosePrompt(toolboxcategory, form),
+          prompt,
         }),
       }
     );
 
     // response錯誤時，顯示錯誤訊息
     if (!response.ok) {
-      toast.error("機器人出錯了，請稍後再試");
+      toast.error("機器人出錯了，請稍後再試", { id: notification });
       return;
     }
 
@@ -70,16 +93,6 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
     }
   };
 
-  // 重製thinking
-  const handleReset = () => {
-    setThinking("");
-  };
-
-  // 複製thinking文字
-  const handleCopy = () => {
-    navigator.clipboard.writeText(thinking);
-    toast.success("已複製到剪貼簿");
-  };
   return (
     <>
       <ToolboxChooseForm
@@ -92,6 +105,7 @@ function Toolbox({ toolboxcategory }: { toolboxcategory: toolboxcategory }) {
         message={thinking}
         handleReset={handleReset}
         handleCopy={handleCopy}
+        handleContinue={handleContinue}
       />
     </>
   );

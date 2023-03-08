@@ -18,11 +18,12 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
     model:"code-davinci-002",
     prompt: prompt.trim(),
     temperature: 0,
-    max_tokens: 600,
+    max_tokens: 300,
     frequency_penalty: 0,
     presence_penalty: 0,
     stream: true,
     n: 1,
+    top_p: 1,
     stop: ["\"\"\""],
   };
 
