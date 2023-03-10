@@ -42,7 +42,9 @@ function RobotResponseCard({
             <div
               ref={responsescroll as MutableRefObject<HTMLDivElement>}
               className="pr-4 flex-col  h-[60vh]  overflow-y-auto scrollbar prose text-slate-100">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className="whitespace-pre-wrap">
                 {message}
               </ReactMarkdown>
             </div>

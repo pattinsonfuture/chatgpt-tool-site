@@ -24,26 +24,10 @@ const SendChatGPT = async (req: Request): Promise<Response> => {
     stream: true,
     n: 1,
     top_p: 1,
-    stop: ["\"\"\""],
+    stop: ["\"\"\"","###"],
   };
 
   const stream = await QueryStream(payload);
-
-  // 判斷stream狀態是否error
-  // const reader = stream.getReader();
-  // reader.read().catch(error => {
-  //   console.log('处理错误:', error);
-  // });
-
-  // 超過 9 秒沒有回應就結束 並回應錯誤 
-  // const timeout = setTimeout(() => {
-  //   // stream.getReader()
-  //   // stream.cancel();
-  //   return new Response("Timeout", { status: 408 });
-  // }, 9000);
-
-
-
 
   return new Response(stream);
 };

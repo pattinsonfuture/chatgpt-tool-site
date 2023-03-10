@@ -44,7 +44,6 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
         function onParse(event: ParsedEvent | ReconnectInterval) {
           if (event.type === "event") {
             const data = event.data;
-            // console.log("onParse data", data);
             // https://beta.openai.com/docs/api-reference/completions/create#completions/create-stream
             if (data === "[DONE]") {
               controller.close();
@@ -72,13 +71,11 @@ const QueryStream = async (payload:OpenAIStreamPayload) => {
         // this ensures we properly read chunks and invoke an event for each SSE event stream
         const parser = createParser(onParse);
         // https://web.dev/streams/#asynchronous-iteration        
-        
+        let chunkdata = "";
         for await (const chunk of res.body as any) {
-          let chunkdata = decoder.decode(chunk);
-          console.log('chunk', chunkdata,typeof(chunkdata));
-          
-          
+          chunkdata += decoder.decode(chunk);
           parser.feed(chunkdata);
+          chunkdata = "";
         }
       },
 

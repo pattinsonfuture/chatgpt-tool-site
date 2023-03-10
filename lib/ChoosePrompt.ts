@@ -16,7 +16,7 @@ export const ChoosePrompt = (toolboxcategory:toolboxcategory,form:CombinedFormIn
     }else if (toolboxcategory === "code-convert") {
         return `老闆:請輸入你想要重構的程式碼。\n你:`
     }else if (toolboxcategory === "code-fix") {
-        return `老闆:請輸入你想要修正的程式碼。\n你:`
+        return `### Fix bugs in the below function\n### Buggy ${form.language}\n${form.code}\n### Fixed ${form.language}`
     }else if (toolboxcategory === "code-interpret") {
         return `${form.code}\n\n\"\"\"\n解釋以上 ${form.language} 程式碼的意思:\n\"\"\"\n解釋:`
     }else if (toolboxcategory === "code-regex") {
