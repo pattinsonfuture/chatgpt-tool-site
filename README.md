@@ -1,6 +1,6 @@
 # ChatGPT 工具箱
 
-![Logo](https://github.com/pattinsonfuture/chatgpt-tool-site/blob/main/public/images/c07aa58e518a0a01.png?raw=true)
+![Logo](https://github.com/pattinsonfuture/chatgpt-tool-site/blob/main/public/images/224849.png?raw=true)
 
 > 這是一個使用 Next.js和 Openai API 開發的 GPT工具箱。
 
