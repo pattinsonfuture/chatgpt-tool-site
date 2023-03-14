@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ChatGPT 工具箱
 
-## Getting Started
+![Logo](https://github.com/pattinsonfuture/chatgpt-tool-site/blob/main/public/images/c07aa58e518a0a01.png?raw=true)
 
-First, run the development server:
+> 這是一個使用 Next.js和 Openai API 開發的 GPT工具箱。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### [Demo](https://chatgpt-tool-site.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### How To Use
+1. 克隆或下載本存儲庫
+2. 在終端中進入存儲庫目錄
+3. 安裝所需的依賴項
+   ```bash
+   npm install
+   # 或者
+   yarn install
+   ```
+4. 建立本地環境檔 `.env.local`
+   到[Openai](https://platform.openai.com/account/api-keys)註冊你的密鑰
+   ```bash
+   OPENAI_API_KEY=
+   ```
+5. 啟動環境
+   ```bash
+   npm run dev
+   # 或者
+   yarn dev
+   ```
+6. 進入網址`http://localhost:3000/`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+在終端中進入存儲庫目錄
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+執行以下命令安裝所需的依賴項：
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 功能特色 TODO
+- [x] Robot聊天室
+- [x] 程式語言
+  - [x] 解釋程式
+  - [x] 修正程式
+  - [x] 轉換語言
+  - [ ] ~~程式簡潔化~~
+  - [ ] ~~重構程式~~
+  - [ ] ~~正規表達式~~
+- [x] 撰寫文章
+  - [x] 擷取摘要
+  - [x] 生成新聞稿
+- [x] 市場業務
+  - [x] 介紹產品
+- [ ] 精美的介面：需要一個UI大大求救
+- [ ] 精美的動畫
+- [x] Openai API
+  - [x] chat completions API (gpt-3.5-turbo)
+  - [x] completions API (text-davinci-003)
+  - [x] using nextjs edge with ReadableStream 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
